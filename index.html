@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MMM Корпорация - Мы Можем Многое (2025)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for a clean, professional, green-themed scam site */
+        body {
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.5s ease;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="#047857" opacity="0.8"/></svg>') 10 10, auto; /* Darker green dot cursor */
+            overflow-x: hidden;
+            background-color: #f0fdf4; /* Very light green */
+            color: #1a2e05; /* Very dark green */
+        }
+        .section {
+            min-height: 100vh; /* Full viewport height sections */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 1rem; /* Consistent padding */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.98); /* Almost opaque white */
+            backdrop-filter: blur(18px); /* More blur */
+            border: none;
+            border-radius: 16px; /* More rounded corners */
+            padding: 3.5rem; /* More padding */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Softer, larger shadow */
+            transition: transform 0.6s ease, box-shadow 0.6s ease;
+            width: 95%;
+            max-width: 1000px; /* Even wider cards */
+            margin: 2rem auto; /* More margin */
+            position: relative;
+            z-index: 10; /* Ensure cards are above background effects */
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-20px); /* More pronounced lift */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); /* Stronger shadow on hover */
+        }
+        .gradient-text {
+             background: linear-gradient(45deg, #047857, #10b981); /* Dark green to Teal gradient */
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             background-clip: text;
+             color: transparent;
+         }
+         .btn-primary {
+             background: linear-gradient(45deg, #047857, #10b981); /* Green gradient */
+             color: white;
+             font-weight: bold;
+             padding: 1rem 3rem; /* Larger padding */
+             border-radius: 8px;
+             transition: all 0.3s ease;
+             box-shadow: 0 4px 8px rgba(4, 120, 87, 0.4); /* Dark green shadow */
+         }
+         .btn-primary:hover {
+             background: linear-gradient(45deg, #10b981, #047857); /* Reverse gradient */
+             box-shadow: 0 6px 12px rgba(4, 120, 87, 0.5);
+         }
+         .subtle-pulse {
+             animation: pulse 3s infinite ease-in-out; /* Slower, smoother pulse */
+         }
+         @keyframes pulse {
+             0% { transform: scale(1); opacity: 1; }
+             50% { transform: scale(1.01); opacity: 0.99; } /* Very subtle pulse */
+             100% { transform: scale(1); opacity: 1; }
+         }
+
+         /* Background Images/Gradients - Clean Green Theme */
+         #hero { background-image: linear-gradient(to bottom right, rgba(4, 120, 87, 0.9), rgba(16, 185, 129, 0.9)), url('https://placehold.co/1920x1080/047857/ffffff?text=Abstract+Green+Pattern'); }
+         #opportunities { background-image: linear-gradient(to bottom left, rgba(240, 253, 244, 0.98), rgba(255, 255, 255, 0.98)), url('https://placehold.co/1920x1080/f0fdf4/1a2e05?text=Clean+Lines'); background-blend-mode: overlay;}
+         #investments { background-image: linear-gradient(to bottom right, rgba(16, 185, 129, 0.15), rgba(4, 120, 87, 0.15)), url('https://placehold.co/1920x1080/10b981/ffffff?text=Green+Investment'); background-blend-mode: multiply;}
+         #features { background-image: linear-gradient(to bottom left, rgba(255, 255, 255, 0.99), rgba(240, 253, 244, 0.99)), url('https://placehold.co/1920x1080/ffffff/1a2e05?text=Minimalist+Design'); }
+         #testimonials { background-image: linear-gradient(to bottom right, rgba(4, 120, 87, 0.1), rgba(16, 185, 129, 0.1)), url('https://placehold.co/1920x1080/047857/ffffff?text=Happy+Investors'); background-blend-mode: screen;}
+         #companies { background-color: #1a2e05; } /* Dark green background for marquee */
+         #contact { background-image: linear-gradient(to bottom right, rgba(23, 37, 84, 0.95), rgba(30, 41, 59, 0.95)), url('https://placehold.co/1920x1080/172554/f0fdf4?text=Dark+Abstract'); }
+
+
+         /* Pop-up Ad Styles */
+         .ad-popup {
+             position: fixed;
+             bottom: 40px;
+             right: 40px;
+             width: 350px;
+             background-color: #fff;
+             border-radius: 12px;
+             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+             padding: 25px;
+             z-index: 1000;
+             display: none;
+             opacity: 0;
+             transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+             transform: translateY(30px);
+         }
+         .ad-popup.show {
+             display: block;
+             opacity: 1;
+             transform: translateY(0);
+         }
+         .ad-popup h4 {
+             font-size: 1.4rem;
+             font-weight: bold;
+             margin-bottom: 10px;
+             color: #065f46;
+         }
+         .ad-popup img {
+             max-width: 100%;
+             height: auto;
+             border-radius: 8px;
+             margin-bottom: 15px;
+         }
+         .ad-popup button {
+             display: block;
+             width: 100%;
+             padding: 14px;
+             text-align: center;
+             font-size: 1.2rem;
+             cursor: pointer;
+             border: none;
+             border-radius: 8px;
+             background: linear-gradient(45deg, #ef4444, #f97316);
+             color: white;
+             font-weight: bold;
+             transition: background 0.3s ease, box-shadow 0.3s ease;
+             box-shadow: 0 2px 5px rgba(239, 68, 68, 0.3);
+         }
+         .ad-popup button:hover {
+             background: linear-gradient(45deg, #f97316, #ef4444);
+             box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+         }
+         .ad-close {
+             position: absolute;
+             top: 15px;
+             right: 15px;
+             font-size: 1.6rem;
+             cursor: pointer;
+             color: #999;
+             transition: color 0.2s ease;
+         }
+         .ad-close:hover {
+             color: #666;
+         }
+
+
+         /* Payment Window Styles */
+         .payment-window {
+             position: fixed;
+             top: 0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             background-color: rgba(0, 0, 0, 0.9);
+             z-index: 1001;
+             display: none;
+             justify-content: center;
+             align-items: center;
+             opacity: 0;
+             transition: opacity 0.7s ease-in-out;
+         }
+         .payment-window.show {
+             display: flex;
+             opacity: 1;
+         }
+         .payment-content {
+             background-color: #fff;
+             padding: 40px;
+             border-radius: 12px;
+             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+             width: 95%;
+             max-width: 480px;
+             position: relative;
+             transform: scale(0.95);
+             transition: transform 0.7s ease-in-out;
+         }
+          .payment-window.show .payment-content {
+              transform: scale(1);
+          }
+         .payment-content h4 {
+             font-size: 1.8rem;
+             font-weight: bold;
+             margin-bottom: 30px;
+             color: #065f46;
+             text-align: center;
+         }
+         .payment-content input {
+             display: block;
+             width: 100%;
+             padding: 16px;
+             margin-bottom: 20px;
+             border: 1px solid #ccc;
+             border-radius: 8px;
+             font-size: 1.1rem;
+             transition: border-color 0.3s ease, box-shadow 0.3s ease;
+         }
+          .payment-content input:focus {
+              border-color: #10b981;
+              box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+              outline: none;
+          }
+         .payment-content button {
+             display: block;
+             width: 100%;
+             padding: 16px;
+             text-align: center;
+             font-size: 1.3rem;
+             cursor: pointer;
+             border: none;
+             border-radius: 8px;
+             background: linear-gradient(45deg, #10b981, #34d399);
+             color: white;
+             font-weight: bold;
+             transition: background 0.3s ease, box-shadow 0.3s ease;
+              box-shadow: 0 4px 10px rgba(16, 185, 129, 0.4);
+         }
+          .payment-content button:hover {
+              background: linear-gradient(45deg, #34d399, #10b981);
+               box-shadow: 0 6px 15px rgba(16, 185, 129, 0.5);
+          }
+         .payment-close {
+             position: absolute;
+             top: 20px;
+             right: 20px;
+             font-size: 1.8rem;
+             cursor: pointer;
+             color: #999;
+             transition: color 0.2s ease;
+         }
+         .payment-close:hover {
+             color: #666;
+         }
+         .payment-status {
+             margin-top: 25px;
+             text-align: center;
+             font-weight: bold;
+             min-height: 1.5em;
+         }
+
+
+         /* Easter Egg Styles */
+         .hidden-message {
+             display: none;
+             margin-top: 20px;
+             padding: 15px;
+             background-color: #ecfdf5;
+             border: 1px dashed #065f46;
+             border-radius: 5px;
+             font-style: italic;
+             color: #064e3b;
+             text-align: center;
+             opacity: 0;
+             transition: opacity 0.5s ease-in-out;
+         }
+         .hidden-message.show {
+             display: block;
+             opacity: 1;
+         }
+          .strange-glow:hover {
+              text-shadow: 0 0 12px rgba(52, 211, 153, 0.9);
+          }
+
+         /* More Interesting Visuals */
+         .feature-icon {
+             font-size: 3.5rem;
+             margin-bottom: 1rem;
+             color: #047857;
+         }
+         .testimonial-card {
+             flex: 0 0 300px; /* Fixed width for testimonial cards */
+             margin-right: 20px; /* Space between cards */
+             background-color: #ffffff;
+             border-left: 4px solid #10b981; /* Teal border */
+             border-radius: 8px;
+             padding: 2rem;
+             font-style: italic;
+             color: #495057;
+             position: relative;
+             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+         }
+         .testimonial-card::before {
+             content: '"';
+             font-size: 4rem; /* Even larger quote */
+             color: #065f46; /* Dark green quote color */
+             position: absolute;
+             left: 20px;
+             top: 20px;
+             opacity: 0.3;
+         }
+         .testimonial-card p {
+             margin-left: 2.5rem; /* More offset */
+             line-height: 1.6;
+         }
+         .testimonial-card cite {
+             display: block;
+             margin-top: 1.5rem;
+             text-align: right;
+             font-style: normal;
+             font-weight: bold;
+             color: #343a40;
+         }
+         .testimonial-list-container {
+             overflow-x: auto; /* Enable horizontal scrolling */
+             white-space: nowrap; /* Prevent wrapping */
+             padding-bottom: 20px; /* Space for scrollbar */
+             -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+         }
+         .testimonial-list {
+             display: inline-flex; /* Arrange items horizontally */
+         }
+
+
+         .section-title {
+             font-size: 2.5rem;
+             font-weight: bold;
+             margin-bottom: 1.5rem; /* Less space */
+             color: #1a2e05;
+         }
+         .section-subtitle {
+             font-size: 1.2rem;
+             color: #374151;
+             margin-bottom: 3rem;
+         }
+
+         /* Animation for background elements */
+         .bg-element {
+             position: absolute;
+             opacity: 0.1;
+             pointer-events: none;
+         }
+         .bg-element-1 {
+             width: 200px;
+             height: 200px;
+             background-color: #34d399;
+             border-radius: 50%;
+             top: 10%;
+             left: -50px;
+             animation: float 10s infinite ease-in-out alternate;
+         }
+          .bg-element-2 {
+             width: 150px;
+             height: 150px;
+             background-color: #10b981;
+             border-radius: 50%;
+             bottom: 15%;
+             right: -50px;
+             animation: float 12s infinite ease-in-out alternate reverse;
+         }
+         @keyframes float {
+             0% { transform: translateY(0); }
+             100% { transform: translateY(20px); }
+         }
+
+         /* Companies Marquee */
+         .marquee-container {
+             width: 100%;
+             overflow: hidden;
+             background-color: #1a2e05; /* Dark green background */
+             padding: 1rem 0;
+             box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.2);
+         }
+         .marquee-content {
+             display: inline-block;
+             white-space: nowrap;
+             animation: marquee 30s linear infinite; /* Adjust duration for speed */
+         }
+         .marquee-content span {
+             display: inline-block;
+             margin-right: 50px; /* Space between company names */
+             color: #d1fae5; /* Light green text */
+             font-size: 1.1rem;
+             font-weight: bold;
+         }
+         @keyframes marquee {
+             0% { transform: translateX(100%); }
+             100% { transform: translateX(-100%); }
+         }
+
+
+    </style>
+</head>
+<body>
+
+    <div id="floatingElement" class="floating-element"></div>
+
+    <header class="bg-gray-800 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <h1 id="siteTitle" class="text-2xl md:text-3xl font-bold mb-2 md:mb-0 gradient-text cursor-pointer strange-glow">MMM Корпорация</h1>
+            <nav>
+                <ul class="flex flex-wrap justify-center md:justify-start space-x-4 md:space-x-6 text-sm md:text-base">
+                    <li><a href="#hero" class="hover:underline text-gray-300 hover:text-white transition duration-200">О нас</a></li>
+                    <li><a href="#opportunities" class="hover:underline text-gray-300 hover:text-white transition duration-200">Возможности</a></li>
+                    <li><a href="#investments" class="hover:underline text-gray-300 hover:text-white transition duration-200">Инвестиции</a></li>
+                    <li><a href="#features" class="hover:underline text-gray-300 hover:text-white transition duration-200">Особенности</a></li>
+                    <li><a href="#testimonials" class="hover:underline text-gray-300 hover:text-white transition duration-200">Отзывы</a></li>
+                    <li><a href="#contact" class="hover:underline text-gray-300 hover:text-white transition duration-200">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="hero" class="section text-white">
+        <div class="bg-element bg-element-1"></div>
+         <div class="bg-element bg-element-2"></div>
+
+        <div class="text-center max-w-4xl mx-auto card">
+            <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gray-800">Добро пожаловать в <span class="gradient-text">MMM</span> Корпорацию!</h2>
+            <p class="text-xl mb-8 text-gray-700">
+                <span class="font-bold gradient-text">Мы Можем Многое!</span> Мы открываем двери к <span class="font-bold text-teal-600">неограниченным возможностям</span> и финансовой свободе. Ваше будущее начинается здесь. С 2025 года и далее.
+            </p>
+            <button id="ctaButton" class="btn-primary subtle-pulse">
+                Начать Сейчас!
+            </button>
+            <p id="heroMessage" class="mt-6 text-lg font-semibold text-gray-700 min-h-[1.5em]"></p>
+        </div>
+    </section>
+
+    <section id="companies" class="marquee-container">
+        <div class="marquee-content">
+            <span>Google</span>
+            <span>Apple</span>
+            <span>Microsoft</span>
+            <span>Amazon</span>
+            <span>Facebook</span>
+            <span>Tesla</span>
+            <span>Netflix</span>
+            <span>Nvidia</span>
+            <span>Samsung</span>
+            <span>Sony</span>
+            <span>Coca-Cola</span>
+            <span>PepsiCo</span>
+             <span>MMM Корпорация</span> <span>General Electric</span>
+             <span>Boeing</span>
+             <span>SpaceX</span>
+             <span>IBM</span>
+             <span>Intel</span>
+             <span>Oracle</span>
+             <span>SAP</span>
+             <span>Toyota</span>
+             <span>Volkswagen</span>
+             <span>BMW</span>
+             <span>Mercedes-Benz</span>
+             <span>MMM Корпорация</span> </div>
+    </section>
+
+
+    <section id="opportunities" class="section bg-gray-100">
+        <div class="container mx-auto text-center">
+            <div class="card max-w-4xl mx-auto">
+                 <h3 class="section-title text-gray-800">Наши Эксклюзивные Возможности</h3>
+                 <p class="section-subtitle text-gray-700">
+                    Мы предлагаем уникальные пути для <span class="font-bold text-green-700">экспоненциального роста</span>.
+                    Исследуйте потенциал, который доступен только избранным.
+                </p>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+                     <div class="text-left">
+                         <h4 class="text-xl font-bold mb-2 text-teal-600">Программа "Дельта"</h4>
+                         <p class="text-gray-700">Высокодоходные операции с минимальными рисками (заявление не является гарантией).</p>
+                     </div>
+                      <div class="text-left">
+                         <h4 class="text-xl font-bold mb-2 text-green-600">Фонд "Омега"</h4>
+                         <p class="text-gray-700">Доступ к закрытым рынкам и активам будущего (доступ ограничен).</p>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="investments" class="section bg-blue-50">
+        <div class="container mx-auto text-center">
+             <div class="card max-w-4xl mx-auto">
+                <h3 class="section-title text-gray-800">Инвестируйте с Умом (Нашим Умом)</h3>
+                <p class="section-subtitle text-gray-700">
+                    Наши алгоритмы обеспечивают <span class="font-bold text-purple-600">беспрецедентную точность</span> прогнозов.
+                    Ваши вложения в надежных руках (наших).
+                </p>
+                 <div id="investmentData" class="mt-6 text-3xl font-extrabold text-teal-600">
+                    Прогнозируемый Рост: <span id="growthRate">Загрузка...</span>
+                </div>
+                <button id="updateGrowthBtn" class="btn-primary mt-8">
+                    Обновить Прогноз
+                </button>
+                 <p id="growthStatus" class="mt-4 text-red-600 font-bold min-h-[1.5em]"></p>
+            </div>
+        </div>
+    </section>
+
+     <section id="features" class="section bg-gray-200">
+        <div class="container mx-auto text-center">
+            <div class="card max-w-4xl mx-auto">
+                 <h3 class="section-title text-gray-800">Особенности Нашей Платформы</h3>
+                 <p class="section-subtitle text-gray-700">
+                    Мы разработали передовую платформу для вашего успеха.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                    <div class="text-center">
+                        <div class="feature-icon">🔒</div> <h4 class="text-xl font-bold mb-2 text-gray-800">Высокая Безопасность</h4>
+                        <p class="text-gray-700">Ваши данные под надежной защитой (мы надеемся).</p>
+                    </div>
+                     <div class="text-center">
+                        <div class="feature-icon">⚡</div> <h4 class="text-xl font-bold mb-2 text-gray-800">Мгновенные Операции</h4>
+                        <p class="text-gray-700">Почти мгновенные. Иногда.</p>
+                    </div>
+                     <div class="text-center">
+                        <div class="feature-icon">🤖</div> <h4 class="text-xl font-bold mb-2 text-gray-800">Искусственный Интеллект</h4>
+                        <p class="text-gray-700">Наш ИИ принимает решения за вас (иногда).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <section id="testimonials" class="section bg-blue-100">
+        <div class="container mx-auto text-center">
+            <div class="card max-w-full mx-auto"> <h3 class="section-title text-gray-800">Отзывы Довольных Клиентов</h3>
+                 <p class="section-subtitle text-gray-700">
+                    Послушайте, что говорят те, кто уже с нами. (Прокрутите вправо!)
+                </p>
+                <div class="testimonial-list-container">
+                    <div id="testimonialList" class="testimonial-list">
+                        <div class="testimonial-card">
+                             <p>Загрузка отзывов...</p>
+                             <cite>- Ожидающий Клиент</cite>
+                         </div>
+                    </div>
+                </div>
+                 </div>
+        </div>
+    </section>
+
+
+    <section id="contact" class="section bg-gray-800 text-white">
+        <div class="container mx-auto text-center">
+            <div class="card max-w-4xl mx-auto bg-gray-700 text-white">
+                <h3 class="section-title text-white">Свяжитесь с Нами</h3>
+                 <p class="section-subtitle text-gray-300">
+                    Заполните форму ниже, чтобы получить доступ к эксклюзивной информации.
+                </p>
+                <form class="flex flex-col items-center">
+                    <input type="text" placeholder="Ваше Имя (обязательно)" class="p-3 mb-4 w-full max-w-sm rounded text-gray-800 border-2 border-teal-500 focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                    <input type="email" placeholder="Ваш Email (для связи)" class="p-3 mb-4 w-full max-w-sm rounded text-gray-800 border-2 border-teal-500 focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50">
+                    <textarea placeholder="Ваш Вопрос (кратко)" rows="4" class="p-3 mb-4 w-full max-w-sm rounded text-gray-800 border-2 border-teal-500 focus:border-green-500 focus:ring focus:ring-green-500 focus:ring-opacity-50"></textarea>
+                    <button type="submit" class="btn-primary mt-4">
+                        Отправить Запрос
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-gray-400 p-8 text-center">
+        <p>&copy; 2025 MMM Корпорация. Все права защищены. (Очень хорошо защищены)</p>
+        <p class="mt-4 text-sm">
+            <a href="book.pdf" download="Как перестать быть дебилом том 1.pdf" class="text-teal-400 hover:underline">Скачать книгу "Как перестать быть дебилом том 1"</a>
+        </p>
+    </footer>
+
+    <div id="adPopup" class="ad-popup">
+        <span class="ad-close" id="closeAd">&times;</span>
+        <h4>Секрет Успеха Раскрыт!</h4>
+        [Image of Book Cover]
+        <p class="text-sm text-gray-700 mb-3">
+            Узнайте, как достичь финансового просветления с книгой "Как перестать быть дебилом том 1".
+        </p>
+        <button id="buyBookBtn">Купить Сейчас (Очень Выгодно)</button>
+    </div>
+
+    <div id="paymentWindow" class="payment-window">
+        <div class="payment-content">
+            <span class="payment-close" id="closePayment">&times;</span>
+            <h4>Введите Платежные Данные</h4>
+             <input type="text" placeholder="Номер Карты" id="cardNumber">
+            <input type="text" placeholder="Срок Действия (ММ/ГГ)" id="expiryDate">
+            <input type="text" placeholder="CVV" id="cvv">
+            <input type="text" placeholder="Имя на Карте" id="cardName">
+            <button id="processPaymentBtn">Обработать Платеж</button>
+             <p id="paymentStatus" class="payment-status text-red-600"></p>
+        </div>
+    </div>
+
+
+    <script>
+        // JavaScript for dynamic functionality and scam-like interactions
+
+        // Floating Element
+        const floatingElement = document.getElementById('floatingElement');
+        document.addEventListener('mousemove', (e) => {
+            floatingElement.style.transform = `translate(${e.clientX - 10}px, ${e.clientY - 10}px)`; // Adjust for larger cursor
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Hero Section CTA Button
+        const ctaButton = document.getElementById('ctaButton');
+        const heroMessage = document.getElementById('heroMessage');
+        const ctaMessages = [
+            "Отлично! Мы ожидали вашего шага.",
+            "Система: Запрос на начало обработки принят.",
+            "Поздравляем! Вы сделали первый шаг к... чему-то.",
+            "Инициализация процесса... Пожалуйста, подождите (вечно).",
+             "Ваш интерес зафиксирован. Скоро с вами свяжутся (возможно).",
+             "Наш ИИ уже анализирует ваш потенциал.",
+             "Система: Активирован протокол 'Новичок'.",
+             "Мы Можем Многое! И вы тоже можете!"
+        ];
+
+        ctaButton.addEventListener('click', () => {
+            const randomMessage = ctaMessages[Math.floor(Math.random() * ctaMessages.length)];
+            heroMessage.textContent = randomMessage;
+             heroMessage.style.color = '#1f2937'; // Dark text for message
+        });
+
+        // Investment Data Update
+        const growthRateElement = document.getElementById('growthRate');
+        const updateGrowthBtn = document.getElementById('updateGrowthBtn');
+        const growthStatus = document.getElementById('growthStatus');
+
+        updateGrowthBtn.addEventListener('click', () => {
+            const randomGrowth = (Math.random() * 80 + 30).toFixed(2); // Growth between 30% and 110% (more aggressive)
+            growthRateElement.textContent = `${randomGrowth}%`;
+
+            const statuses = [
+                "Статус: Прогноз обновлен. Данные выглядят... многообещающе.",
+                "Статус: Анализ завершен. Рост подтвержден.",
+                "Статус: Обновление данных... Незначительные колебания.",
+                "Статус: Прогноз: Высокий. Действуйте быстро!",
+                 "Статус: Система работает. Прогноз сгенерирован.",
+                 "Статус: Алгоритмы предсказывают... прибыль?",
+                 "Статус: Ваши вложения готовы к росту!",
+                 "Статус: Данные синхронизированы с блокчейном (нашим).",
+                 "Статус: Потенциал роста: Неограничен!"
+            ];
+            growthStatus.textContent = statuses[Math.floor(Math.random() * statuses.length)];
+            growthStatus.style.color = '#047857'; // Dark green for success/positive status
+        });
+
+        // Testimonial Display (Horizontal)
+        const testimonialListElement = document.getElementById('testimonialList');
+
+        const strangeTestimonials = [
+            { quote: "Я вложил немного... и теперь у меня есть много! (Почти).", cite: "Иван К., Оптимист" },
+            { quote: "Моя жизнь изменилась после MMM. Я стал... более внимательным к деталям.", cite: "Мария С., Просветленный Пользователь" },
+            { quote: "Система работает. Иногда присылает уведомления о транзакциях, которых я не делал, но это, наверное, нормально.", cite: "Алексей П., Доверяющий Клиент" },
+            { quote: "Мой кот одобрил. Он теперь смотрит на меня с уважением. Или голоден.", cite: "Елена В., Владелец Финансово Подкованного Кота" },
+            { quote: "Я до сих пор пытаюсь понять, как это работает, но цифры на экране выглядят красиво!", cite: "Дмитрий Г., Визуальный Инвестор" },
+            { quote: "Мне сказали, что это безопасно. Я верю им. Почему бы и нет?", cite: "Ольга Ф., Доверчивый Вкладчик"},
+            { quote: "Я получил письмо с поздравлением... но деньги пока не пришли. Наверное, задержка.", cite: "Сергей В., Терпеливый Инвестор"},
+            { quote: "Не знаю, как это работает, но выглядит очень профессионально!", cite: "Анна Л., Впечатленный Посетитель"},
+            { quote: "Мой баланс на платформе растет! (Хотя я не могу вывести средства).", cite: "Павел З., Наблюдатель Роста"}
+        ];
+
+        function loadTestimonials() {
+            testimonialListElement.innerHTML = ''; // Clear current list
+            strangeTestimonials.forEach(testimonial => {
+                const testimonialHtml = `
+                    <div class="testimonial-card">
+                        <p>${testimonial.quote}</p>
+                        <cite>- ${testimonial.cite}</cite>
+                    </div>
+                `;
+                testimonialListElement.innerHTML += testimonialHtml;
+            });
+        }
+
+        loadTestimonials(); // Load testimonials on page load
+
+        // Pop-up Ad Logic
+        const adPopup = document.getElementById('adPopup');
+        const closeAdBtn = document.getElementById('closeAd');
+        const buyBookBtn = document.getElementById('buyBookBtn');
+        const paymentWindow = document.getElementById('paymentWindow');
+        const closePaymentBtn = document.getElementById('closePayment');
+        const processPaymentBtn = document.getElementById('processPaymentBtn');
+        const paymentStatus = document.getElementById('paymentStatus');
+
+        // Show ad after a delay
+        setTimeout(() => {
+            adPopup.classList.add('show');
+        }, 9000); // Show after 9 seconds
+
+        closeAdBtn.addEventListener('click', () => {
+            adPopup.classList.remove('show');
+        });
+
+        buyBookBtn.addEventListener('click', () => {
+            adPopup.classList.remove('show'); // Hide ad
+            paymentWindow.classList.add('show'); // Show payment window
+        });
+
+        closePaymentBtn.addEventListener('click', () => {
+            paymentWindow.classList.remove('show'); // Hide payment window
+             // Clear payment fields and status
+             document.getElementById('cardNumber').value = '';
+             document.getElementById('expiryDate').value = '';
+             document.getElementById('cvv').value = '';
+             document.getElementById('cardName').value = '';
+             paymentStatus.textContent = '';
+        });
+
+        processPaymentBtn.addEventListener('click', () => {
+            // Simulate payment processing - in a real scam, this would send data
+            paymentStatus.style.color = '#f59e0b'; // Amber warning color
+            paymentStatus.textContent = "Обработка платежа... Пожалуйста, подождите...";
+
+            setTimeout(() => {
+                // Simulate success or failure randomly
+                if (Math.random() > 0.05) { // 95% chance of "success" (very convincing scam)
+                    paymentStatus.style.color = '#047857'; // Dark green success color
+                    paymentStatus.textContent = "Платеж успешно обработан! Спасибо за вашу... инвестицию.";
+                     // Clear fields on success
+                     document.getElementById('cardNumber').value = '';
+                     document.getElementById('expiryDate').value = '';
+                     document.getElementById('cvv').value = '';
+                     document.getElementById('cardName').value = '';
+                     // Optionally close window after a delay
+                     setTimeout(() => {
+                         paymentWindow.classList.remove('show');
+                         paymentStatus.textContent = ''; // Clear status after closing
+                     }, 3000);
+                } else { // 5% chance of "failure" (to seem more real?)
+                    paymentStatus.style.color = '#dc2626'; // Red error color
+                    paymentStatus.textContent = "Ошибка платежа. Пожалуйста, проверьте данные и попробуйте снова. (Или используйте другую карту)";
+                }
+            }, 3000); // Simulate processing time
+        });
+
+
+        // Easter Egg: Click on MMM Корпорация title
+        const siteTitle = document.getElementById('siteTitle');
+        const strangeTitles = [
+            "MMM Корпорация",
+            "МММ: Мы Меняем Мир?",
+            "MMM: Мавроди Мог Мечтать",
+            "MMM: Ваш Путь к...?",
+            "MMM: Просто Нажмите Кнопку",
+             "MMM: Не Задавайте Вопросов",
+             "MMM: Финансовая Пирамида?",
+             "MMM: Доверьтесь Нам!",
+             "MMM: Где Ваши Деньги?",
+             "MMM: Это Не То, Что Вы Думаете",
+             "MMM: Мы Можем Многое!"
+        ];
+        let titleClickCount = 0;
+
+        siteTitle.addEventListener('click', () => {
+            titleClickCount++;
+            const randomTitle = strangeTitles[Math.floor(Math.random() * strangeTitles.length)];
+            siteTitle.textContent = randomTitle;
+
+            if (titleClickCount === 5) {
+                 heroMessage.textContent = "Система: Обнаружена повышенная активность в заголовке. Это не предусмотрено.";
+                 heroMessage.style.color = '#dc2626'; // Red color for warning
+            } else if (titleClickCount === 10) {
+                 // Trigger a more significant strange event
+                 alert("ВНИМАНИЕ: Вы активировали режим 'Глубокого Погружения'. Некоторые функции могут работать непредсказуемо."); // Using alert for a jarring effect
+                 // Add a class to body for temporary strange styles (optional, could add glitch effect etc.)
+                 // body.classList.add('strange-mode');
+                 // setTimeout(() => {
+                 //     body.classList.remove('strange-mode');
+                 // }, 10000); // Remove strange mode after 10 seconds
+            }
+        });
+
+         // Easter Egg: Konami Code (Up Up Down Down Left Right Left Right B A)
+         const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+         let konamiCodePosition = 0;
+
+         document.addEventListener('keydown', (e) => {
+             // Check if the key pressed matches the next key in the sequence
+             if (e.code === konamiCode[konamiCodePosition]) {
+                 konamiCodePosition++;
+                 // If the entire sequence is matched
+                 if (konamiCodePosition === konamiCode.length) {
+                     console.log("Konami Code entered!");
+                     alert("Поздравляем! Вы нашли секретный код! Награда: Увеличение вашего 'Коэффициента Любопытства' на 1000%.");
+                     konamiCodePosition = 0; // Reset sequence
+                 }
+             } else {
+                 konamiCodePosition = 0; // Reset sequence if wrong key is pressed
+             }
+         });
+
+         // Easter Egg: Hovering over the footer
+         const footer = document.querySelector('footer');
+         let footerHoverCount = 0;
+         const footerMessages = [
+             "Вы смотрите в футер? Там нет ничего интересного. Или есть?",
+             "Система: Область футера под наблюдением.",
+             "Футер: Место, где скрываются истины... или просто копирайт.",
+             "Продолжайте наводить. Статистика собирается.",
+              "Футер: Конец сайта. Или начало чего-то другого?",
+              "Футер: Здесь нет секретов. Или они очень хорошо спрятаны.",
+              "Футер: Не тратьте время здесь. Лучше инвестируйте!",
+              "Футер: Мы Можем Многое! Даже в футере."
+         ];
+
+         footer.addEventListener('mouseover', () => {
+             footerHoverCount++;
+             if (footerHoverCount % 3 === 0) { // Show message every 3 hovers
+                 const randomMessage = footerMessages[Math.floor(Math.random() * footerMessages.length)];
+                 heroMessage.textContent = `(Системное Уведомление из Футера): ${randomMessage}`;
+                 heroMessage.style.color = '#4b5563'; // Darker gray for footer messages
+             }
+         });
+
+
+    </script>
+
+</body>
+</html>
