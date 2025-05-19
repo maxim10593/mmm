@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МММ - Мы Можем Многое!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Скрываем полосы прокрутки */
+            font-family: sans-serif; /* Простой шрифт */
+        }
+
+        /* Стили для начальной страницы */
+        #initialPage {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Занимаем всю высоту экрана */
+            background-color: #008000; /* Зеленый фон */
+            color: white; /* Белый текст */
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box; /* Учитываем padding в размере */
+        }
+
+        #initialPage h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        #initialPage button {
+            padding: 15px 30px;
+            font-size: 1.5em;
+            cursor: pointer;
+            background-color: #ff0000; /* Красная кнопка */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #initialPage button:hover {
+            background-color: #cc0000; /* Темнее при наведении */
+        }
+
+        /* Стили для страницы скримера */
+        #screamerPage {
+            display: none; /* Скрываем по умолчанию */
+            position: fixed; /* Фиксируем на весь экран */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black; /* Черный фон */
+            justify-content: center;
+            align-items: center;
+        }
+
+        #screamerImage {
+            display: block; /* Показываем изображение */
+            width: 100%; /* Растягиваем на всю ширину */
+            height: 100%; /* Растягиваем на всю высоту */
+            object-fit: cover; /* Обрезаем, чтобы покрыть весь контейнер */
+            filter: none; /* Начальное состояние фильтра */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="initialPage">
+        <h1>МММ - Мы Можем Многое!</h1>
+        <p>Нажмите кнопку, чтобы начать работу с нами и узнать больше о наших возможностях!</p>
+        <button id="startButton">Начать</button>
+    </div>
+
+    <div id="screamerPage">
+        <img id="screamerImage" src="screamer.jpg" alt="Скример">
+    </div>
+
+    <audio id="screamerSound" src="screamer_sound.mp3" preload="auto" loop></audio>
+
+    <script>
+        const initialPage = document.getElementById('initialPage');
+        const screamerPage = document.getElementById('screamerPage');
+        const screamerImage = document.getElementById('screamerImage');
+        const screamerSound = document.getElementById('screamerSound');
+        const startButton = document.getElementById('startButton');
+
+        // Устанавливаем свойство loop для звука
+        screamerSound.loop = true;
+
+        // Функция для мигания изображением (более агрессивные фильтры)
+        function flashImage() {
+            // Переключаем CSS-фильтры для создания эффекта мигания
+            if (screamerImage.style.filter === 'none' || screamerImage.style.filter === '') {
+                // Очень яркие и инвертированные цвета
+                screamerImage.style.filter = 'brightness(3) contrast(3) hue-rotate(180deg) saturate(5)';
+            } else {
+                screamerImage.style.filter = 'none'; // Возвращаем к нормальному состоянию
+            }
+        }
+
+        // Обработчик клика по кнопке "Начать"
+        startButton.addEventListener('click', function() {
+            // Скрываем начальную страницу
+            initialPage.style.display = 'none';
+
+            // Показываем страницу скримера
+            screamerPage.style.display = 'flex'; // Используем flex для центрирования содержимого
+
+            // Запускаем звук
+            screamerSound.play().catch(error => {
+                console.error('Ошибка воспроизведения звука:', error);
+                // В случае ошибки автовоспроизведения, звук может не проиграться
+                // В реальных условиях можно добавить инструкцию или кнопку "Включить звук"
+            });
+
+            // Запускаем мигание с высокой частотой (например, каждые 30 миллисекунд для большей интенсивности)
+            setInterval(flashImage, 30); // Интервал в миллисекундах
+        });
+
+        // Опционально: если изображение загружается долго, можно скрыть initialPage
+        // только после загрузки изображения скримера. Но для скримера лучше, чтобы
+        // он появлялся мгновенно после клика.
+    </script>
+
+</body>
+</html>
+
