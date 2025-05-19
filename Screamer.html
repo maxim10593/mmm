@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скример!</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* Скрываем полосы прокрутки */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Занимаем всю высоту экрана */
+            background-color: black; /* Черный фон для контраста */
+        }
+
+        #screamerImage {
+            max-width: 100%; /* Изображение не будет выходить за пределы контейнера */
+            max-height: 100vh; /* Изображение не будет выходить за пределы высоты экрана */
+            display: none; /* Скрываем изображение по умолчанию, пока не загрузится */
+            filter: none; /* Начальное состояние фильтра */
+        }
+    </style>
+</head>
+<body>
+
+    <img id="screamerImage" src="screamer.jpg" alt="Скример">
+    <audio id="screamerSound" src="screamer_sound.mp3" preload="auto"></audio>
+
+    <script>
+        const screamerImage = document.getElementById('screamerImage');
+        const screamerSound = document.getElementById('screamerSound');
+
+        // Функция для мигания изображением
+        function flashImage() {
+            // Переключаем CSS-фильтры для создания эффекта мигания
+            if (screamerImage.style.filter === 'none' || screamerImage.style.filter === '') {
+                screamerImage.style.filter = 'brightness(2) contrast(2) hue-rotate(180deg)'; // Пример агрессивного фильтра
+            } else {
+                screamerImage.style.filter = 'none'; // Возвращаем к нормальному состоянию
+            }
+        }
+
+        // Запускаем скример сразу после загрузки страницы
+        window.onload = function() {
+            screamerImage.style.display = 'block'; // Показываем изображение
+            screamerSound.play().catch(error => {
+                // Обработка ошибки автовоспроизведения (браузеры могут блокировать без взаимодействия пользователя)
+                console.error('Ошибка воспроизведения звука:', error);
+                // Можно добавить сообщение для пользователя или кнопку для запуска звука, если автоплей заблокирован
+            });
+
+            // Запускаем мигание с высокой частотой (например, каждые 50 миллисекунд)
+            setInterval(flashImage, 50); // Интервал в миллисекундах
+        };
+    </script>
+
+</body>
+</html>
+
