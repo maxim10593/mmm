@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>МММ - Мы Можем Многое!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        /* Общие стили для соответствия основной странице */
         body {
             margin: 0;
             overflow: hidden; /* Скрываем полосы прокрутки */
-            font-family: sans-serif; /* Простой шрифт */
+            font-family: 'Roboto', sans-serif; /* Используем тот же шрифт */
+            background-color: #f0fdf4; /* Очень светлый зеленый фон */
+            color: #1a2e05; /* Очень темный зеленый текст */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="#047857" opacity="0.8"/></svg>') 10 10, auto; /* Темно-зеленый курсор */
         }
 
         /* Стили для начальной страницы */
@@ -18,31 +23,42 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh; /* Занимаем всю высоту экрана */
-            background-color: #008000; /* Зеленый фон */
+            background: linear-gradient(45deg, #047857, #10b981); /* Зеленый градиент как на основной */
             color: white; /* Белый текст */
             text-align: center;
             padding: 20px;
             box-sizing: border-box; /* Учитываем padding в размере */
+            border-radius: 16px; /* Закругленные углы */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); /* Тень */
         }
 
         #initialPage h1 {
             font-size: 3em;
             margin-bottom: 20px;
+            font-weight: bold; /* Жирный шрифт */
+        }
+
+        #initialPage p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            max-width: 600px;
         }
 
         #initialPage button {
             padding: 15px 30px;
             font-size: 1.5em;
             cursor: pointer;
-            background-color: #ff0000; /* Красная кнопка */
+            background: linear-gradient(45deg, #ef4444, #f97316); /* Красный градиент для кнопки */
             color: white;
             border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+            border-radius: 8px; /* Закругленные углы */
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4); /* Тень кнопки */
         }
 
         #initialPage button:hover {
-            background-color: #cc0000; /* Темнее при наведении */
+            background: linear-gradient(45deg, #f97316, #ef4444); /* Обратный градиент при наведении */
+            box-shadow: 0 6px 12px rgba(239, 68, 68, 0.5); /* Усиленная тень */
         }
 
         /* Стили для страницы скримера */
@@ -71,7 +87,7 @@
 
     <div id="initialPage">
         <h1>МММ - Мы Можем Многое!</h1>
-        <p>Нажмите кнопку, чтобы начать работу с нами и узнать больше о наших возможностях!</p>
+        <p>Нажмите кнопку, чтобы начать работу с нами и узнать больше о наших возможностях! Вас ждет невероятное путешествие в мир финансовых чудес!</p>
         <button id="startButton">Начать</button>
     </div>
 
@@ -120,12 +136,7 @@
             // Запускаем мигание с высокой частотой (например, каждые 30 миллисекунд для большей интенсивности)
             setInterval(flashImage, 30); // Интервал в миллисекундах
         });
-
-        // Опционально: если изображение загружается долго, можно скрыть initialPage
-        // только после загрузки изображения скримера. Но для скримера лучше, чтобы
-        // он появлялся мгновенно после клика.
     </script>
 
 </body>
 </html>
-
